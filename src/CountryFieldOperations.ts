@@ -1,0 +1,134 @@
+import api from '@forge/api';
+import { useProductContext } from '@forge/ui';
+import countryData from './CountryData';
+
+const countriesFieldName = 'Countries';
+
+class CountryFieldOperations {
+
+  getFieldData = async () => {
+    const response = await api
+      .asUser()
+      .requestJira(`/rest/api/3/field`);
+    const fieldData = await response.json();
+    // console.log(`Fields: ${JSON.stringify(fieldData, null, 2)}`);
+    return fieldData;
+  };
+
+  getCountriesFieldData = (fieldData) => {
+    if (fieldData) {
+      for (const field of fieldData) {
+        if (field.name === countriesFieldName) {
+          return field;
+        }
+      }
+    }
+    return undefined;
+  };
+
+  getIssueData = async () => {
+    const context = useProductContext();
+    const issueKey = context.platformContext.issueKey;
+    const response = await api
+      .asUser()
+      .requestJira(`/rest/api/3/issue/${issueKey}?expand=renderedFields`);
+    const issueData = await response.json();
+    return issueData;
+  };
+
+  getIssueCountryNames = (countriesFieldData, issueData) => {
+    if (countriesFieldData && countriesFieldData.id && issueData && issueData.fields && issueData.fields[countriesFieldData.id]) {
+      const countryNames = [];
+      for (const field of issueData.fields[countriesFieldData.id]) {
+        console.log(`Found countries field: ${JSON.stringify(field, null, 2)}`);
+        countryNames.push(field.value);
+      }
+      return countryNames;
+    }
+    return undefined;
+  }
+
+  createCountryCustomField = async () => {
+    const countriesFieldData = await this.createEmptyCountryCustomField();
+    await this.addCountryFieldOptions(countriesFieldData);
+    await this.addCountryFieldToDefaultScreen(countriesFieldData);
+  }
+
+  createEmptyCountryCustomField = async () => {
+    const payload = {
+      searcherKey: "com.atlassian.jira.plugin.system.customfieldtypes:multiselectsearcher",
+      name: countriesFieldName,
+      description: "Custom field for picking countries",
+      type: "com.atlassian.jira.plugin.system.customfieldtypes:multiselect"
+    };
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    };
+    const response = await api
+      .asUser()
+      .requestJira(`/rest/api/3/field`, options);
+    console.log('Create country field response:', response);
+    const countriesFieldData = await response.json();
+    /*
+        Example response:
+        {
+          id: 'customfield_10032',
+          key: 'customfield_10032',
+          name: 'Countries',
+          custom: true,
+          orderable: true,
+          navigable: true,
+          searchable: true,
+          clauseNames: [ 'cf[10032]', 'Countries' ],
+          schema: {
+            type: 'array',
+            items: 'option',
+            custom: 'com.atlassian.jira.plugin.system.customfieldtypes:multiselect',
+            customId: 10032
+          }
+        }
+    */
+   return countriesFieldData;
+  }
+
+  addCountryFieldOptions = async (countriesFieldData) => {
+    const fieldId = countriesFieldData.schema.customId;
+    const payload = {
+      options: []
+    };
+    for (const countryInfo of countryData.countryInfos) {
+      if (countryInfo.name) {
+        payload.options.push({
+          value: countryInfo.name
+        });  
+      } else {
+        throw new Error(`No name found for ID: ${countryInfo.id}`);
+      }
+    }
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    };
+    const response = await api
+      .asUser()
+      .requestJira(`/rest/api/3/customField/${fieldId}/option`, options);
+    console.log('Add country field options response:', response);
+  }
+
+  addCountryFieldToDefaultScreen = async (countriesFieldData) => {
+    const fieldId = countriesFieldData.schema.customId;
+    const options = {
+      method: 'POST'
+    };
+    const response = await api
+      .asUser()
+      .requestJira(`/rest/api/3/screens/addToDefault/customfield_${fieldId}`, options);
+    console.log('Add country field to default screen response:', response);
+    const responseData = await response.json();
+    console.log(' * responseData:', responseData);
+  }
+
+}
+
+export default new CountryFieldOperations();
