@@ -1,12 +1,12 @@
 modules:
   'jira:issuePanel':
     - key: forge-country-custom-field-panel
-      function: main
+      function: map-ui
       title: Countries
       description: A Forge app displaying an issue panel comprising a world map highlighting the countries identified by a custom field.
   function:
-    - key: main
+    - key: map-ui
       handler: index.run
 app:
   id: 'ari:cloud:ecosystem::app/e9d2d90a-7731-4ab1-b78d-cf58c46ca41e'
-  name: forge-country-custom-field
+  name: forge-issue-countries
