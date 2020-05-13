@@ -1,8 +1,3 @@
-import ForgeUI, {
-  Fragment,
-  Image,
-} from "@forge/ui";
-
 class CountryData {
 
   countryInfos: string[];

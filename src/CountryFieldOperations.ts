@@ -11,7 +11,6 @@ class CountryFieldOperations {
       .asUser()
       .requestJira(`/rest/api/3/field`);
     const fieldData = await response.json();
-    // console.log(`Fields: ${JSON.stringify(fieldData, null, 2)}`);
     return fieldData;
   };
 

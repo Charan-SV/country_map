@@ -1,5 +1,4 @@
 import ForgeUI, {
-  Fragment,
   Image,
 } from "@forge/ui";
 import countryData from './CountryData';
