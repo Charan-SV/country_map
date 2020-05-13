@@ -2,7 +2,7 @@
   "name": "forge-issue-countries",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "SEE LICENSE IN /LICENSE",
   "private": true,
   "scripts": {
     "lint": "./node_modules/.bin/eslint src/**/* || npm run --silent hook-errors",
