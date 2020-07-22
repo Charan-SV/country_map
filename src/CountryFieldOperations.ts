@@ -27,6 +27,7 @@ class CountryFieldOperations {
 
   getIssueData = async () => {
     const context = useProductContext();
+    // @ts-ignore
     const issueKey = context.platformContext.issueKey;
     const response = await api
       .asUser()
@@ -97,11 +98,14 @@ class CountryFieldOperations {
       options: []
     };
     for (const countryInfo of countryData.countryInfos) {
+      // @ts-ignore
       if (countryInfo.name) {
         payload.options.push({
+          // @ts-ignore
           value: countryInfo.name
         });  
       } else {
+        // @ts-ignore
         throw new Error(`No name found for ID: ${countryInfo.id}`);
       }
     }
