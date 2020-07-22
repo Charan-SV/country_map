@@ -1,6 +1,6 @@
-# Contributing to DACI helper
+# Contributing to Forge Issue Countries
 
-Thank you for considering a contribution to DACI helper! Pull requests, and comments are welcome.
+Thank you for considering a contribution to Forge Issue Countries! Pull requests, and comments are welcome.
 To give us feedback on this example or the documentation use the links at [give feedback](https://developer.atlassian.com/platform/forge/give-feedback/).
 
 For pull requests, please:
