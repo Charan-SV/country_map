@@ -3,6 +3,7 @@ modules:
     - key: forge-issue-countries-forge-country-custom-field-panel
       function: map-ui
       title: forge-issue-countries
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-countries-icon.svg
       description: A Forge app displaying an issue panel comprising a world map
         highlighting the countries identified by a custom field.
   function:
