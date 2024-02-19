@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2017",
-    "sourceMap": true,
-    "moduleResolution": "node",
+    "lib": ["es2022"],
+    "module": "node16",
+    "target": "es2022",
+    // "strict": true,
     "esModuleInterop": true,
-    "lib": ["dom", "es2017"],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node16",
+    "outDir": "./out",
     "types": ["node", "react"],
-    "baseUrl": "./",
-    "allowJs": true,
     "jsx": "react",
     "jsxFactory": "ForgeUI.createElement"
-  },
-  "include": ["./src/**/*"]
+  }
 }

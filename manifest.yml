@@ -10,7 +10,9 @@ modules:
     - key: map-ui
       handler: index.run
 app:
-  id: ari:cloud:ecosystem::app/6df0358d-65a7-4630-8731-eb9408a15bf1
+  runtime:
+    name: nodejs18.x
+  id: 'please run `forge register`'
 permissions:
   scopes:
     - read:field:jira
