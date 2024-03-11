@@ -67,6 +67,10 @@ class CountryFieldOperations {
     };
     const options = {
       method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload),
     };
     const response = await api
@@ -131,6 +135,10 @@ class CountryFieldOperations {
     }
     const options = {
       method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload),
     };
 
