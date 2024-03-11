@@ -19,6 +19,7 @@ permissions:
     - read:avatar:jira
     - read:project-category:jira
     - read:project:jira
+    - manage:jira-project
     - read:field-configuration:jira
     - read:issue-meta:jira
     - read:issue-security-level:jira
