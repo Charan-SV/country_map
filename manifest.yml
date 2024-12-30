@@ -12,7 +12,7 @@ modules:
 app:
   runtime:
     name: nodejs18.x
-  id: 'please run `forge register`'
+  id: ari:cloud:ecosystem::app/452746ed-0ddb-465b-a45e-a39928e39032
 permissions:
   scopes:
     - read:field:jira
